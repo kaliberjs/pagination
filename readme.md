@@ -14,16 +14,16 @@
 - run `git push --tags`
 - Send everybody an email to introduce them to your library!
 
-# Library title
-Short description.
+# Pagination
+Generate a pagination array, with null values to indicate gaps.
 
 ## Motivation
-Optionally add a bit of text describing why this library exists.
+Whenever you need this, there's probably a deeper issue with the design you're implementing. Nevertheless: when you have to add pagination, it's nice to have something off the shelft. 
 
 ## Installation
 
 ```
-yarn add @kaliber/library
+yarn add @kaliber/pagination
 ```
 
 ## Usage
@@ -40,7 +40,7 @@ function Component() {
 # Reference
 Optionally add a reference, if your library needs it.
 
-![](https://media.giphy.com/media/find-a-good-gif/giphy.gif)
+![](https://giphy.com/clips/joolstv-jools-tv-1-2-3-song-counting-Cnj6KKwag9FshBuJK5)
 
 ## Disclaimer
 This library is intended for internal use, we provide __no__ support, use at your own risk. It does not import React, but expects it to be provided, which [@kaliber/build](https://kaliberjs.github.io/build/) can handle for you.
