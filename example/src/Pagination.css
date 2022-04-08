@@ -1,0 +1,45 @@
+.component {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  & > .next {
+    order: 1;
+  }
+
+  & > .previous {
+    order: -1;
+  }
+}
+
+.componentBullets {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  list-style-type: none;
+  padding: 0;
+
+  & > * { 
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+.gap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.componentBullet {
+  display: grid;
+  place-items: center;
+  background: #eee;
+  border-radius: 50%;
+  width: 3rem !important;
+  height: 3rem !important;
+
+  &.isActive {
+    font-weight: bold;
+  }
+}
