@@ -14,7 +14,7 @@ export function Pagination({ current, max, deriveUrl, onChange }) {
         dataX='goto-next-page'
         {...{ max, deriveUrl }}
       >
-        &rarr;
+        →
       </Arrow>
 
       <Arrow
