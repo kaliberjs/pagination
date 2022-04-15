@@ -76,7 +76,7 @@ console.log(getPagination({ current: 2, max: 5, padding: 1 }))
 
 ---
 
-![](https://media.giphy.com/media/l378khQxt68syiWJy/giphy-downsized-large.gif)
+![](https://media.giphy.com/media/3o6MbdZPdSUE0FE4zC/giphy.gif)
 
 ## Disclaimer
 This library is intended for internal use, we provide __no__ support, use at your own risk. It does not import React, but expects it to be provided, which [@kaliber/build](https://kaliberjs.github.io/build/) can handle for you.
