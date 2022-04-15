@@ -30,7 +30,7 @@ function Component({ page, pageCount }) {
     <nav>
       {pagination.map(x => x
         ? <a href={`?page=${x}`}>{x}</a>
-        : <span>&hellip;</span>
+        : <span>…</span>
       )}
     </nav>
   )

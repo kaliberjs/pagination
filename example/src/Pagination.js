@@ -25,7 +25,7 @@ export function Pagination({ current, max, deriveUrl, onChange }) {
         dataX='goto-previous-page'
         {...{ max, deriveUrl }}
       >
-        &larr;
+        ←
       </Arrow>
 
       <Bullets onBulletClick={handleClick} {...{ current, max, deriveUrl }} />
@@ -42,43 +42,46 @@ function Bullets({ current, max, deriveUrl, onBulletClick }) {
 
   return (
     <ul className={styles.componentBullets}>
-      {pagination.map((x, i) => typeof x === 'number' ? (
-        <li key={i}>
-          <Bullet
-            page={x}
-            url={deriveUrl(x)}
-            active={current === x}
-            onClick={() => onBulletClick(x)}
-            dataX={`goto-page-${x}`}
-          />
-        </li>
-      ) : (
-        <li role="presentation" className={styles.gap}>&hellip;</li>
-      ))}
+      {pagination.map((x, i) => x
+        ? (
+          <li key={i}>
+            <Bullet
+              page={x}
+              url={deriveUrl(x)}
+              active={current === x}
+              onClick={() => onBulletClick(x)}
+              dataX={`goto-page-${x}`}
+            />
+          </li>
+        )
+        : <li key={i} role="presentation" className={styles.gap}>…</li>
+      )}
     </ul>
   )
 }
 
 function Bullet({ page, url, active, onClick, dataX }) {
-  return active ? (
-    <strong
-      className={cx(styles.componentBullet, styles.isActive)}
-      aria-current='true'
-      aria-label={`Page ${page} (current page)`}
-    >
-      {page}
-    </strong>
-  ) : (
-    <a
-      className={styles.componentBullet}
-      href={url}
-      onClick={handleClick}
-      aria-label={`Page ${page}`}
-      data-x={dataX}
-    >
-      {page}
-    </a>
-  )
+  return active
+    ? (
+      <strong
+        className={cx(styles.componentBullet, styles.isActive)}
+        aria-current='true'
+        aria-label={`Page ${page} (current page)`}
+      >
+        {page}
+      </strong>
+    )
+    : (
+      <a
+        className={styles.componentBullet}
+        href={url}
+        onClick={handleClick}
+        aria-label={`Page ${page}`}
+        data-x={dataX}
+      >
+        {page}
+      </a>
+    )
 
   function handleClick(e) {
     e.preventDefault()
@@ -89,24 +92,26 @@ function Bullet({ page, url, active, onClick, dataX }) {
 function Arrow({ page, max, deriveUrl, onClick, layoutClassName, label, dataX, children }) {
   const hasPage = page >= 1 && page <= max
 
-  return hasPage ? (
-    <a
-      href={deriveUrl(page)}
-      className={cx(styles.componentArrow, layoutClassName)}
-      onClick={handleClick}
-      aria-label={label}
-      data-x={dataX}
-    >
-      {children}
-    </a>
-  ) : (
-    <span
-      className={cx(styles.componentArrow, styles.disabled, layoutClassName)}
-      aria-hidden='true'
-    >
-      {children}
-    </span>
-  )
+  return hasPage
+    ? (
+      <a
+        href={deriveUrl(page)}
+        className={cx(styles.componentArrow, layoutClassName)}
+        onClick={handleClick}
+        aria-label={label}
+        data-x={dataX}
+      >
+        {children}
+      </a>
+    )
+    : (
+      <span
+        className={cx(styles.componentArrow, styles.disabled, layoutClassName)}
+        aria-hidden='true'
+      >
+        {children}
+      </span>
+    )
 
   function handleClick(e) {
     e.preventDefault()
