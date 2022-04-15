@@ -2,11 +2,11 @@
 Generate an array with page numbers, with null values to indicate gaps.
 
 ## Motivation
-Whenever you need this, there's probably a deeper issue with the design you're implementing. Nevertheless: when you have to add pagination, it's nice to have something off the shelft. 
+Whenever you need this, there's probably a deeper issue with the design you're implementing. Nevertheless: when you must add pagination to your application, it's nice to have something ready on the shelf. 
 
 ## Installation
 
-```
+```x1
 yarn add @kaliber/pagination
 ```
 
@@ -34,6 +34,8 @@ function Component({ currentPage, maxPages }) {
   )
 }
 ```
+
+**🚨 Gotcha**: This library is designed to output a static number of pagination items. You should keep that in mind when displaying arrows alongside the pagination: don't hide them, but disable them instead.
 
 # Reference
 `getPagination` accepts 1 option object as argument, with 3 required properties:
