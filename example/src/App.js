@@ -13,7 +13,7 @@ export default function App() {
         min={1}
         max={25}
         value={max}
-        onInput={e => setMax(e.currentTarget.value)} 
+        onInput={e => setMax(e.currentTarget.value)}
       />
     </div>
   )

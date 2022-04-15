@@ -1,41 +1,41 @@
 import { getPagination } from '@kaliber/pagination'
 import styles from './Pagination.css'
 
-export function Pagination({ current, max, deriveUrl, onChange }) {
+export function Pagination({ currentPage, maxPages, onPageChange, deriveUrl }) {
 
   // Semantics: https://www.a11ymatters.com/pattern/pagination/
   return (
     <nav className={styles.component} aria-label='Pagination'>
       <Arrow
-        page={current + 1}
-        onClick={() => handleClick(current + 1)}
+        page={currentPage + 1}
+        onClick={() => handleClick(currentPage + 1)}
         layoutClassName={styles.next}
-        label={`Next page (page ${current + 1})`}
-        disabled={current >= max}
+        label={`Next page (page ${currentPage + 1})`}
+        disabled={currentPage >= maxPages}
         dataX='goto-next-page'
-        {...{ max, deriveUrl }}
+        {...{ maxPages, deriveUrl }}
       >
         →
       </Arrow>
 
       <Arrow
-        page={current - 1}
-        onClick={() => handleClick(current - 1)}
+        page={currentPage - 1}
+        onClick={() => handleClick(currentPage - 1)}
         layoutClassName={styles.previous}
-        label={`Previous page (page ${current - 1})`}
-        disabled={current <= 1}
+        label={`Previous page (page ${currentPage - 1})`}
+        disabled={currentPage <= 1}
         dataX='goto-previous-page'
-        {...{ max, deriveUrl }}
+        {...{ maxPages, deriveUrl }}
       >
         ←
       </Arrow>
 
-      <Bullets onBulletClick={handleClick} {...{ current, max, deriveUrl }} />
+      <Bullets onBulletClick={handleClick} {...{ currentPage, maxPages, deriveUrl }} />
     </nav>
   )
 
   function handleClick(x) {
-    if (x !== current) onChange(x)
+    if (x !== currentPage) onPageChange(x)
   }
 }
 
