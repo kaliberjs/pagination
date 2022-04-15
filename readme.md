@@ -28,11 +28,10 @@ function Component({ page, pageCount }) {
   
   return (
     <nav>
-      {pagination.map(x => typeof x === 'number' ? (
-        <a href={`?page=${x}`}>{x}</a>
-      ) : (
-        <span>&hellip;</span>
-      ))}
+      {pagination.map(x => x
+        ? <a href={`?page=${x}`}>{x}</a>
+        : <span>&hellip;</span>
+      )}
     </nav>
   )
 }
