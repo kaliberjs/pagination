@@ -17,12 +17,10 @@ Be sure to checkout the /example folder, it has an accessible example. `getPagin
 ```jsx
 import { getPagination } from '@kaliber/pagination'
 
-const RESULTS_PER_PAGE = 10
-
-function Component({ page, pageCount }) {
+function Component({ currentPage, maxPages }) {
   const pagination = getPagination({ 
-    current: page, 
-    max: Math.floor(pageCount / RESULTS_PER_PAGE), 
+    current: currentPage, 
+    max: maxPages, 
     padding: 2 
   })
   
