@@ -11,6 +11,7 @@ export function Pagination({ current, max, deriveUrl, onChange }) {
         onClick={() => handleClick(current + 1)}
         layoutClassName={styles.next}
         label={`Next page (page ${current + 1})`}
+        disabled={current >= max}
         dataX='goto-next-page'
         {...{ max, deriveUrl }}
       >
@@ -22,6 +23,7 @@ export function Pagination({ current, max, deriveUrl, onChange }) {
         onClick={() => handleClick(current - 1)}
         layoutClassName={styles.previous}
         label={`Previous page (page ${current - 1})`}
+        disabled={current <= 1}
         dataX='goto-previous-page'
         {...{ max, deriveUrl }}
       >
@@ -89,11 +91,17 @@ function Bullet({ page, url, active, onClick, dataX }) {
   }
 }
 
-function Arrow({ page, max, deriveUrl, onClick, layoutClassName, label, dataX, children }) {
-  const hasPage = page >= 1 && page <= max
-
-  return hasPage
+function Arrow({ page, max, deriveUrl, onClick, disabled, layoutClassName, label, dataX, children }) {
+  return disabled
     ? (
+      <span
+        className={cx(styles.componentArrow, styles.disabled, layoutClassName)}
+        aria-hidden='true'
+      >
+        {children}
+      </span>
+    )
+    : (
       <a
         href={deriveUrl(page)}
         className={cx(styles.componentArrow, layoutClassName)}
@@ -103,14 +111,6 @@ function Arrow({ page, max, deriveUrl, onClick, layoutClassName, label, dataX, c
       >
         {children}
       </a>
-    )
-    : (
-      <span
-        className={cx(styles.componentArrow, styles.disabled, layoutClassName)}
-        aria-hidden='true'
-      >
-        {children}
-      </span>
     )
 
   function handleClick(e) {
