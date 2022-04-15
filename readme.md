@@ -11,7 +11,7 @@ yarn add @kaliber/pagination
 ```
 
 ## Usage
-Be sure to checkout the /example folder, it has an accessible example. `getPagination` only provides the bare bones data needed to render a pagination. It's up to you to make sure it's accessible. If you're not sure how, check out this article: [Accessible Pagination
+Be sure to checkout the /example folder, it has an accessible example. `getPagination` only provides the bare bones data needed to render a pagination. It's up to you to make sure it's accessible. If you're not sure how, check out the example folder for an implementation based on this article: [Accessible Pagination
 ](https://www.a11ymatters.com/pattern/pagination/).
 
 ```jsx
