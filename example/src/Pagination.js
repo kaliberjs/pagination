@@ -7,7 +7,6 @@ export function Pagination({ currentPage, maxPages, deriveUrl }) {
   return (
     <nav className={styles.component} aria-label='Pagination'>
       <Arrow
-        page={currentPage + 1}
         url={deriveUrl(currentPage + 1)}
         layoutClassName={styles.next}
         label={`Next page (page ${currentPage + 1})`}
@@ -18,7 +17,6 @@ export function Pagination({ currentPage, maxPages, deriveUrl }) {
       </Arrow>
 
       <Arrow
-        page={currentPage - 1}
         url={deriveUrl(currentPage - 1)}
         layoutClassName={styles.previous}
         label={`Previous page (page ${currentPage - 1})`}
@@ -78,7 +76,7 @@ function Bullet({ page, url, active, dataX }) {
     )
 }
 
-function Arrow({ url, onClick, disabled, layoutClassName, label, dataX, children }) {
+function Arrow({ url, disabled, layoutClassName, label, dataX, children }) {
   return disabled
     ? (
       <span
