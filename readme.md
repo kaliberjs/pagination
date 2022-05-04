@@ -6,7 +6,7 @@ Whenever you need this, there's probably a deeper issue with the design you're i
 
 ## Installation
 
-```x1
+```
 yarn add @kaliber/pagination
 ```
 
