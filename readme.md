@@ -1,46 +1,81 @@
-# BEFORE YOU PUBLISH
-- Read [Libraries van Kaliber](https://docs.google.com/document/d/1FrJi-xWtKkbocyMVK5A5_hupjl5E4gD4rDvATDlxWyc/edit#heading=h.bb3md3gyf493).
-- Make sure your example works.
-- Make sure your package.json is correct. Have you change the library title?
-- Update the bin/postInstall script. It should refer to your library.
-- Update the `<title>` tag in `index.html.js`.
-- Remove 'BEFORE YOU PUBLISH' and 'PUBLISHING' from this document.
-
-# PUBLISHING
-- Make sure you are added to the kaliber organization on NPM
-- run `yarn publish`
-- Enter a correct version, we adhere to semantic versioning (semver)
-- run `git push`
-- run `git push --tags`
-- Send everybody an email to introduce them to your library!
-
-# Library title
-Short description.
+# Pagination
+Generate an array with page numbers, with null values to indicate gaps.
 
 ## Motivation
-Optionally add a bit of text describing why this library exists.
+Whenever you need this, there's probably a deeper issue with the design you're implementing. Nevertheless: when you must add pagination to your application, it's nice to have something ready on the shelf. 
 
 ## Installation
 
-```
-yarn add @kaliber/library
+```x1
+yarn add @kaliber/pagination
 ```
 
 ## Usage
-Short example. If your library has multiple ways to use it, show the most used one and refer to `/example` for further examples.
+Be sure to checkout the /example folder, it has an accessible example. `getPagination` only provides the bare bones data needed to render a pagination. It's up to you to make sure it's accessible. If you're not sure how, check out the example folder for an implementation based on this article: [Accessible Pagination
+](https://www.a11ymatters.com/pattern/pagination/).
 
 ```jsx
-import { hello } from 'library'
+import { getPagination } from '@kaliber/pagination'
 
-function Component() {
-  return <div>{hello()}</div>
+function Component({ currentPage, maxPages }) {
+  const pagination = getPagination({ 
+    current: currentPage, 
+    max: maxPages, 
+    padding: 2 
+  })
+  
+  return (
+    <nav>
+      {pagination.map(x => x
+        ? <a href={`?page=${x}`}>{x}</a>
+        : <span>…</span>
+      )}
+    </nav>
+  )
 }
 ```
 
-# Reference
-Optionally add a reference, if your library needs it.
+**🚨 Gotcha**: This library is designed to output a static number of pagination items. You should keep that in mind when displaying arrows alongside the pagination: don't hide them, but disable them instead.
 
-![](https://media.giphy.com/media/find-a-good-gif/giphy.gif)
+# Reference
+`getPagination` accepts 1 option object as argument, with 3 required properties:
+
+| Argument   | Type | Description |
+|---|---|---|
+| `current` | `number` | The current page |
+| `max` | `number` | The maximum number of pages |
+| `padding` | `number` | A positive integer, which states at least how many numbers there  should be next to the current number. There could be shown more numbers, if any gaps can be swapped with numbers to continue the number sequence |
+
+_Example: a padding of 1_
+```
+1 ... 4 5 6 ... 12
+^     ^   ^     ^
+|     |   |     |
+|     |   |     Always shown
+|     Padding of 1
+Always shown
+```
+
+The function returns an array with gaps denoted by a `null` value:
+
+```js
+console.log(getPagination({ current: 5, max: 11, padding: 2 })) 
+// => [1, null, 3, 4, 5, 6, 7, null, 11]
+```
+
+```js
+console.log(getPagination({ current: 2, max: 11, padding: 2 })) 
+// => [1, 2, 3, 4, 5, 6, 7, null, 11]
+```
+
+```js
+console.log(getPagination({ current: 2, max: 5, padding: 1 })) 
+// => [1, 2, 3, 4, 5]
+```
+
+---
+
+![](https://media.giphy.com/media/3o6MbdZPdSUE0FE4zC/giphy.gif)
 
 ## Disclaimer
 This library is intended for internal use, we provide __no__ support, use at your own risk. It does not import React, but expects it to be provided, which [@kaliber/build](https://kaliberjs.github.io/build/) can handle for you.

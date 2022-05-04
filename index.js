@@ -1,1 +1,1 @@
-export { hello } from './src/hello'
+export { getPagination } from './src/getPagination'

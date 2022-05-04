@@ -1,13 +1,14 @@
 {
-  "name": "@kaliber/library",
-  "version": "1.0.0",
+  "name": "@kaliber/pagination",
+  "version": "0.0.0",
   "main": "index.js",
   "sideEffects": false,
   "publishConfig": {
     "access": "public"
   },
   "keywords": [
-    "hello"
+    "kaliber",
+    "pagination"
   ],
   "files": [
     "index.js",
